@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { getPosts } from './api';
+import DeleteButton from './Delete';
+import MessageBox from './message';
+
 
 const PostList = () => {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        const getPosts = async () => {
-          const resp = await fetch(
-            "https://strangers-things.herokuapp.com/api/2112-ftb-et-web-pt/posts"
-          );
+        const getAllPosts = async () => {
+         
     
-          const data = await resp.json();
+          const data = await getPosts();
           console.log(data.data.posts);
           setPosts(data.data.posts);
         };
-        getPosts();
+        getAllPosts();
       }, []);
 
     return (
@@ -23,6 +24,7 @@ const PostList = () => {
                 <div key={post._id}>
                     <h2>{post.title}</h2>
                     <p>{post.description}</p>
+                    {post.isAuthor ? <DeleteButton postId={post._id} setPosts={setPosts}/> :<MessageBox postId={post._id} />}
                 </div>
             )}
         </div>

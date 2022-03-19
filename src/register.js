@@ -6,9 +6,7 @@ const RegisterForm = () => {
         const[password, setPassword] = useState("");
         const[passwordConfirmation, setpasswordConfirmation] = useState("");
 
-useEffect(()=>{
-  localStorage.getItem('data.token');
-})
+
         
   return (
     <div>
