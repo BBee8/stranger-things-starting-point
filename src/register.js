@@ -6,10 +6,8 @@ const RegisterForm = () => {
         const[password, setPassword] = useState("");
         const[passwordConfirmation, setpasswordConfirmation] = useState("");
 
-useEffect(()=>{
-  localStorage.getItem('data.token');
-})
 
+        
   return (
     <div>
       <label htmlFor="username">Username</label>
@@ -20,6 +18,7 @@ useEffect(()=>{
       <br></br>
       <input onChange={event => setPassword(event.target.value)}required />
       <br></br>
+
       <label htmlFor="passwordConfirmation">Confirm Password</label>
       <br></br>
       <input onChange={event => setpasswordConfirmation(event.target.value)}required />
