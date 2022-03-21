@@ -4,16 +4,15 @@ import PostList from "./PostList";
 import RegisterForm from "./register";
 import LoginForm from "./logIn";
 import LogOutButton from "./logOut";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import PostForm from "./postMaker";
 import UserProfile from "./profile";
 
 
-
-
 const App = (props) => {
-  const { name } = props;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
 
   async function validToken() {
     const token = localStorage.getItem("token");
@@ -27,19 +26,47 @@ useEffect(()=>{
   validToken();
 },[]);
 
+//const logOutFunction = () => {
+  //localStorage.removeItem('token');
 
   return (
     <Router>
       <>
-      <h1>Welcome, {name}</h1>
-      <Route path={"/"}>
+      <div id="navbar"
+      style={{
+        display:"flex",
+        marginLeft: "100px",
+        marginRight: "100px",
+        justifyContent: "center",
+        font: "center",
+        color: "green",
+        fontFamily: "'Josefin Sans', sans-serif;"
+      }}>
+        <button><Link to="./logIn">Login</Link></button>
+        <button><Link to="/">Post List</Link></button>
+        <button><Link to="/postMaker">Create a Post</Link></button>
+        <button onClick={async () => (
+          await localStorage.removeItem('token')
+          )}><Link to="/login">Log Out</Link></button>
+        </div>
+      <h1 style={{
+              display:"flex",
+              justifyContent: "center",
+              marginLeft: "100px",
+              marginRight: "100px",
+              background: "lavender",
+              color: "green",
+              border: "solid 5px lavender",
+              fontFamily: "'Josefin Sans', sans-serif;"
+            }}>Welcome to Stranger Things!</h1>
+      <Route exact path={"/"}><PostList /></Route>
+      <Route path={"/postMaker"}><PostForm /></Route>
       <Route path="/login"><LoginForm /></Route>
       <Route path="/user"><UserProfile /></Route>
       {isLoggedIn ? <Route><LogOutButton /></Route> : null}
       <Route path="/register"><RegisterForm /></Route>
-      <Route path="/new-post"><PostForm /></Route>
-      <Route exact path="/"><PostList /></Route>
-      </Route>
+
+      
     </>
     </Router>
     
@@ -47,4 +74,3 @@ useEffect(()=>{
 };
 
 export default hot(App);
-

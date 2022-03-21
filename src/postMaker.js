@@ -20,7 +20,21 @@ const PostForm = () => {
   }  
 
   return (
-    <div className="postform">
+    <div className="postform"
+    style={{
+      display:"flex",
+      marginTop: "50px",
+      marginLeft: "200px",
+      marginRight: "200px",
+      justifyContent: "center",
+      font: "center",
+      background: "lavender",
+      padding: "10px",
+      flexDirection: "column",
+      border: "solid 2px green",
+      color: "green",
+      fontFamily: "'Josefin Sans', sans-serif;"
+    }}>
       <label htmlFor="Title">Title</label>
       <br></br>
       <input value = {title} onChange={(event) => setTitle(event.target.value)} required />
