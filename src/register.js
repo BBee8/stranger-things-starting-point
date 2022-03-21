@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { registerUser } from './api';
 
 const RegisterForm = () => {
@@ -23,7 +23,7 @@ const RegisterForm = () => {
       <br></br>
       <input onChange={event => setpasswordConfirmation(event.target.value)}required />
       <br></br>
-      <button 
+      <button
         disabled={password === passwordConfirmation ? false : true}
         type="button" onClick= { event => {
                 event.preventDefault();

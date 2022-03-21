@@ -12,7 +12,22 @@ const LoginForm = () => {
 
 
   return (
-    <div className="login-box">
+    <div className="login-box"
+    style={{
+      display:"flex",
+      marginTop: "50px",
+      marginLeft: "200px",
+      marginRight: "200px",
+      padding: "10px",
+      background: "lavender",
+      border: "green",
+      justifyContent: "center",
+      font: "center",
+      flexDirection: "column",
+      color: "green",
+      fontFamily: "'Josefin Sans', sans-serif;"
+    }}
+    >
       <label htmlFor="username">Username</label>
       <br></br>
       <input onChange={(event) => setUsername(event.target.value)} required />

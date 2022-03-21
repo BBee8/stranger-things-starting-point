@@ -21,8 +21,6 @@ const MessageBox = (props)=> {
             <button onClick={sendMessage}>Send Message</button>
         </div>
     )
-
-
 }
 
 export default MessageBox;
