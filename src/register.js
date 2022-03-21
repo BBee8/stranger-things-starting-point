@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { registerUser } from './api';
+import { useHistory } from 'react-router-dom';
 
 const RegisterForm = () => {
         const[username, setUsername] = useState("");
         const[password, setPassword] = useState("");
         const[passwordConfirmation, setpasswordConfirmation] = useState("");
 
+const history = useHistory();
 
         
   return (
@@ -31,6 +33,7 @@ const RegisterForm = () => {
                 setUsername("");
                 setPassword("");
                 setpasswordConfirmation("");
+                history.push("/")
                 }}> Register </button>
     </div>
   );

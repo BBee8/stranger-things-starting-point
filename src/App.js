@@ -6,6 +6,7 @@ import LoginForm from "./logIn";
 import LogOutButton from "./logOut";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import PostForm from "./postMaker";
+import UserProfile from "./profile";
 
 
 
@@ -26,7 +27,6 @@ useEffect(()=>{
   validToken();
 },[]);
 
-console.log("Is Logged In: ", isLoggedIn);
 
   return (
     <Router>
@@ -34,10 +34,11 @@ console.log("Is Logged In: ", isLoggedIn);
       <h1>Welcome, {name}</h1>
       <Route path={"/"}>
       <Route path="/login"><LoginForm /></Route>
+      <Route path="/user"><UserProfile /></Route>
       {isLoggedIn ? <Route><LogOutButton /></Route> : null}
       <Route path="/register"><RegisterForm /></Route>
       <Route path="/new-post"><PostForm /></Route>
-      <Route path="/"><PostList /></Route>
+      <Route exact path="/"><PostList /></Route>
       </Route>
     </>
     </Router>

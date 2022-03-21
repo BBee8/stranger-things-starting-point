@@ -16,7 +16,7 @@ const PostForm = () => {
       setPrice("");
       setWillDeliver(false);
       console.log(passingPost);
-      history.push("/");
+      history.push("/login");
   }  
 
   return (

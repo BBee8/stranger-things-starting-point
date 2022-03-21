@@ -1,10 +1,15 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 const LogOutButton =() => {
+    const history = useHistory();
     
     const logOut = () => {
         // event.PreventDefault();
         localStorage.removeItem('token');
+        history.push("/login");
+        
+
     }
 
     return (

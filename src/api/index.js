@@ -3,10 +3,10 @@ export const getPosts = async () => {
   console.log(token);
   const url =
     "https://strangers-things.herokuapp.com/api/2112-ftb-et-web-pt/posts";
-  const response = await fetch(url,{
+  const response = await fetch(url, {
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   });
   const json = await response.json();
@@ -16,7 +16,7 @@ export const getPosts = async () => {
 export const registerUser = async (username, password) => {
   const url =
     "https://strangers-things.herokuapp.com/api/2112-ftb-et-web-pt/users/register";
-  
+
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -31,25 +31,23 @@ export const registerUser = async (username, password) => {
       }),
     });
     const json = await response.json();
-    
+
     const token = json.data.token;
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
     //localStorage.getItem('token');
 
-    
-      
     console.log(json);
     return json;
   } catch (err) {
     console.error("Could not register user", err);
   }
-
 };
 
 export const loginUser = async (username, password) => {
-  const url = "https://strangers-things.herokuapp.com/api/2112-ftb-et-web-pt/users/login"
+  const url =
+    "https://strangers-things.herokuapp.com/api/2112-ftb-et-web-pt/users/login";
 
-  try{
+  try {
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -58,74 +56,95 @@ export const loginUser = async (username, password) => {
       body: JSON.stringify({
         user: {
           username: username,
-          password: password
+          password: password,
         },
-      })
-    })
+      }),
+    });
     const json = await response.json();
-    
+
     const token = json.data.token;
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
     console.log(json);
     return json;
   } catch (err) {
-    console.error("Could not login, username/password do not exist or were incorrect");
+    console.error(
+      "Could not login, username/password do not exist or were incorrect"
+    );
   }
 };
 
-export const makePost = async (title, description, price, willDeliver)=>{
+export const makePost = async (title, description, price, willDeliver) => {
   const token = localStorage.getItem("token");
-  const url = "https://strangers-things.herokuapp.com/api/2112-ftb-et-web-pt/posts"
+  const url =
+    "https://strangers-things.herokuapp.com/api/2112-ftb-et-web-pt/posts";
   return fetch(url, {
     method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       post: {
-        title:title,
-        description:description, 
-        price:price,
-        willDeliver:willDeliver
-      }
-    })
-})
-.then(response => response.json())
-.catch(console.error);}
+        title: title,
+        description: description,
+        price: price,
+        willDeliver: willDeliver,
+      },
+    }),
+  })
+    .then((response) => response.json())
+    .catch(console.error);
+};
 
-export const deletePost = async (postID)=>{
+export const deletePost = async (postID) => {
   const token = localStorage.getItem("token");
   const url = `https://strangers-things.herokuapp.com/api/2112-ftb-et-web-pt/posts/${postID}`;
   await fetch(url, {
     method: "DELETE",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    }
-  }).then(response => response.json())
-    .then(result => {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((result) => {
       console.log(result);
-    }).catch(console.error);
-}
+    })
+    .catch(console.error);
+};
 
-export const messages = async (postID,message)=>{
+export const messages = async (postID, message) => {
   const token = localStorage.getItem("token");
   const url = `https://strangers-things.herokuapp.com/api/2112-ftb-et-web-pt/posts/${postID}/messages`;
   fetch(url, {
     method: "POST",
     headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`,
-  },
-  body: JSON.stringify({
-    message: {
-      content: message
-    }
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      message: {
+        content: message,
+      },
+    }),
   })
-}).then(response => response.json())
-.then(result => {
-  console.log(result);
-})
-.catch(console.error);
-}
+    .then((response) => response.json())
+    .then((result) => {
+      console.log(result);
+    })
+    .catch(console.error);
+};
+export const User = async ()=> {
+  const token = localStorage.getItem("token");
+  const url = 'https://strangers-things.herokuapp.com/api/2112-ftb-et-web-pt/users/me';
+  fetch (url, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+  }).then(response => response.json())
+  .then(result =>{
+    console.log(result);
+  })
+  .catch(console.error);
+};
